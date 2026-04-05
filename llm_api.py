@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = ""
+API_KEY = "your_keys"
 
 def ask_llm(symptom_text):
     response = requests.post(
@@ -10,7 +10,7 @@ def ask_llm(symptom_text):
             "model": "deepseek-chat",
             "messages": [
                 {"role": "system", "content": "你是一个医疗助手"},
-                {"role": "user", "content": f"患者症状：{symptom_text}，可能是什么疾病？"}
+                {"role": "user", "content": f"患者症状：{symptom_text}，这个病怎么治疗？"}
             ]
         }
     )
