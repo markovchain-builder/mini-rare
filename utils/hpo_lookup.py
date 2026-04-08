@@ -25,7 +25,8 @@ def search_hpo(keyword: str) -> list:
 
         # 检查主名称是否包含关键词
         name_match = keyword_lower in lbl.lower()
-
+        # 反向检查关键词是否包含主名称
+        reverse_match = lbl.lower() in keyword_lower
         # 检查同义词里是否包含关键词
         synonym_match = False
         synonyms = node.get("meta", {}).get("synonyms", [])
@@ -34,7 +35,7 @@ def search_hpo(keyword: str) -> list:
                 synonym_match = True
                 break
 
-        if name_match or synonym_match:
+        if name_match or reverse_match or synonym_match:
             raw_id = node.get("id", "")
             code = raw_id.replace(
                 "http://purl.obolibrary.org/obo/HP_", "HP:"
